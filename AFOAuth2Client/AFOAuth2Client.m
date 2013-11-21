@@ -172,7 +172,8 @@ static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *i
     
     self.requestSerializer = [AFHTTPRequestSerializer serializer];
     
-    NSMutableURLRequest *mutableRequest = [self.requestSerializer requestWithMethod:@"POST" URLString:urlString parameters:parameters];
+	NSString *fullPath = [[NSURL URLWithString:urlString relativeToURL:self.baseURL] absoluteString];
+	NSMutableURLRequest *mutableRequest = [self.requestSerializer requestWithMethod:@"POST" URLString:fullPath parameters:parameters];
     [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     AFHTTPRequestOperation *requestOperation = [self HTTPRequestOperationWithRequest:mutableRequest success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject valueForKey:@"error"]) {
