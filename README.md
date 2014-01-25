@@ -16,7 +16,7 @@ AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:url clientID:kCl
                                         NSLog(@"I have a token! %@", credential.accessToken);
                                         [AFOAuthCredential storeCredential:credential withIdentifier:oauthClient.serviceProviderIdentifier];
                                     }
-                                    failure:^(NSError *error) {
+                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                         NSLog(@"Error: %@", error);
                                     }];
 ```
